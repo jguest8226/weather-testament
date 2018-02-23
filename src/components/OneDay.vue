@@ -1,15 +1,14 @@
 <template>
   <div class="hello">
     <h3>{{ msg }}</h3>
-    <h6>Created by Jonathan Guest</h6>
     <ul>
-      <li><router-link to="OneDay">One Day Forecast</router-link></router-link></li>
-      <li><router-link to="Extended">Extended Forecast</router-link></router-link></li>
+      <li><router-link to="Home">Home</router-link></router-link></li>
     </ul>
     <ul>
-    <li><b>{{ forecast[0].date.weekday }}, {{forecast[0].date.pretty}}</b></li>
-    <li><img :src="forecast[0].icon_url" height="75" width="75"></li>
-    <li><b>High:</b> {{ forecast[0].high.fahrenheit }} <b>Low:</b> {{ forecast[0].high.fahrenheit }}</li>
+      <li><img :src="forecast.icon_url" height="80" width="80"></li>
+      <li><b>{{ forecast.weather }}</b></li>
+      <li><b>Temperature:</b> {{ forecast.temp_f }} F</li>
+      <li><b>Feels Like:</b> {{ forecast.feelslike_f }} F</li>
     </ul>
   </div>
 </template>
@@ -20,15 +19,22 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'One Day Forecast',
-      forecast: null
+      msg: 'Current Weather',
+      forecast: null,
+      city: null,
+      state: null,
+      image: null
     }
   },
   created () {
-    axios.get('http://api.wunderground.com/api/46d9c94c03619997/geolookup/conditions/q/MI/Detroit.json')
+    console.log(this.$router.params)
+    this.city = this.$route.params.city
+    this.state = this.$route.params.state
+    axios.get(`http://api.wunderground.com/api/46d9c94c03619997/conditions/q/${this.state}/${this.city}.json`)
       .then(response => {
-        this.forecast = response.data.forecast.simpleforecast.forecastday
-        console.log(response.data.forecast.simpleforecast.forecastday)
+        this.forecast = response.data.current_observation
+        this.image = response.data.current_observation.icon_url
+        console.log(response.data.current_observation)
       })
       .catch(function (response) {
         console.log(response)

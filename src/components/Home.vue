@@ -1,15 +1,14 @@
 <template>
   <div class="hello">
     <h2>Welcome to Weather</h2>
-    <h3>{{ msg }}</h3>
+    <h3></h3>
     <h6>Created by Jonathan Guest</h6>
     <ul>
       <li><form id="form" onsubmit="return false">
       City: <input type="text" id="city"> State: <input type="text" id="state">
-      <input type="submit" onclick="captureLocation()">
+      <input type="submit" value ="Current Weather" v-on:click="captureLocation1">
+      <input type="submit" value ="Extended Forecast" v-on:click="captureLocation2">
       </form></li>
-      <li><router-link to="OneDay">One Day Forecast</router-link></router-link></li>
-      <li id="Extended"><router-link to="Extended">Extended Forecast</router-link></router-link></li>
     </ul>
     <ul>
     <li v-for="item in forecast"><b>{{ item.title }}:</b> <img :src="item.icon_url" height="20" width="20"> {{item.fcttext}}</li>
@@ -29,10 +28,15 @@ export default {
     }
   },
   methods: {
-    captureLocation () {
+    captureLocation1 () {
       var city = document.getElementById('city').value
       var state = document.getElementById('state').value
-      alert(city + '' + state)
+      this.$router.push({name: 'OneDay', params: { city: city, state: state }})
+    },
+    captureLocation2 () {
+      var city = document.getElementById('city').value
+      var state = document.getElementById('state').value
+      this.$router.push({name: 'Extended', params: { city: city, state: state }})
     }
   }
 }
