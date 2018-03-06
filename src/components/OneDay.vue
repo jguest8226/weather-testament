@@ -4,7 +4,7 @@
     <ul>
       <li id="homelink"><router-link to="/">Home</router-link></li>
     </ul>
-    <h2>{{ city }}, {{state}}</h2>
+    <h2>{{forecast.display_location.city}}, {{forecast.display_location.state}}</h2>
     <ul>
       <li><img :src="forecast.icon_url" height="80" width="80"></li>
       <li><b>{{ forecast.weather }}</b></li>
