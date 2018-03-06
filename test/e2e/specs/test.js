@@ -8,33 +8,41 @@ module.exports = {
     // see nightwatch.conf.js
     const devServer = browser.globals.devServerURL
     var currentTime = Date()
+    var inputCity = 'SEATTLE'
+    var inputState = 'WA'
 
     browser
+      //Verify Initial App View
       .url(devServer)
       .waitForElementVisible('#app', 5000)
       .assert.elementPresent('.hello')
       .assert.containsText('h2', 'Welcome to Weather')
       .assert.elementCount('img', 1)
-      .click('#Extended')
+      .setValue('input[id=city]', inputCity)
+      .setValue('input[id=state]', inputState)
+
+      //Verify Extended Forecast
+      .click('#extendedsubmit')
       .pause(3000)
-      .assert.title('weather-testament')
-      .assert.containsText('body','Shladurday')
-      //.assert.containsText('body', 'Tuesday')
+      .assert.containsText('body', inputCity)
+      .assert.containsText('body', inputState)
+      .assert.elementCount('img', 9)
       .saveScreenshot(`extendedforcast${ currentTime }.png`)
-      //.waitForElementVisible('#forecast', 5000)
-      //.assert.elementCount('img', 8)
-      //.assert.containsText('Thursday')
-      //.assert.containsText('.ExtendedForecastView','Thursday')
+
+      //Verify Current Forecast
+      .click('#homelink')
+      .pause(3000)
+      .setValue('input[id=city]', inputCity)
+      .setValue('input[id=state]', inputState)
+      .click('#currentsubmit')
+      .pause(3000)
+      .assert.containsText('body', inputCity)
+      .assert.containsText('body', inputState)
+      .assert.elementCount('img', 2)
+      .saveScreenshot(`currentforcast${ currentTime }.png`)
+
       .end()
 
-    /*var googleCommands = {
-      submit: function() {
-        this.api.pause(1000);
-        return this.waitForElementVisible('@Extended', 1000)
-          .click('@Extended')
-          .waitForElementNotPresent('@Extended');
-      }
-  };*/
 
 
   }

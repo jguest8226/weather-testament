@@ -2,8 +2,9 @@
   <div class="hello">
     <h3>{{ msg }}</h3>
     <ul>
-      <li><router-link to="Home">Home</router-link></router-link></li>
+      <li id="homelink"><router-link to="/">Home</router-link></li>
     </ul>
+    <h2>{{ city }}, {{state}}</h2>
     <ul>
       <li><img :src="forecast.icon_url" height="80" width="80"></li>
       <li><b>{{ forecast.weather }}</b></li>

@@ -3,8 +3,9 @@
     <h3>{{ msg }}</h3>
     <h6>Created by Jonathan Guest</h6>
     <ul>
-      <li><router-link to="Home">Home</router-link></router-link></li>
+      <li id="homelink"><router-link to="/">Home</router-link></li>
     </ul>
+    <h2>{{ city }}, {{state}}</h2>
     <ul>
     <li v-for="item in forecast"><b>{{ item.title }}:</b> <img :src="item.icon_url" height="20" width="20"> {{item.fcttext}}</li>
     </ul>

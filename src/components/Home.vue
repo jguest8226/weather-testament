@@ -6,8 +6,8 @@
     <ul>
       <li><form id="form" onsubmit="return false">
       City: <input type="text" id="city"> State: <input type="text" id="state">
-      <input type="submit" value ="Current Weather" v-on:click="captureLocation1">
-      <input type="submit" value ="Extended Forecast" v-on:click="captureLocation2">
+      <input type="submit" id="currentsubmit" value ="Current Weather" v-on:click="captureLocation1">
+      <input type="submit" id="extendedsubmit" value ="Extended Forecast" v-on:click="captureLocation2">
       </form></li>
     </ul>
     <ul>
