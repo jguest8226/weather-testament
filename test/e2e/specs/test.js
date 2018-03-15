@@ -26,7 +26,6 @@ module.exports = {
     var day3value = null
     var day4value = null
 
-
     //Adjust Days
     if (day1value === 0){
       day2value = day1value + 1
